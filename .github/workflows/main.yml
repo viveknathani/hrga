@@ -8,8 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: Add remote
         run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/hrga.git
 
+      - name: Fetch all changes
+        run: git fetch --all --unshallow
       - name: Push to heroku
         run: git push --force heroku main  
